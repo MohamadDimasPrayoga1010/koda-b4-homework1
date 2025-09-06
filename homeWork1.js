@@ -4,7 +4,7 @@ const { log } = require("node:console");
 
 const rl = readline.createInterface({ input, output });
 function homeMenu() {
-  console.log("Burger Bangor Di jamin ga bikin bangor");
+  console.log("Burger Bangor");
   console.log("1. Menu");
   console.log("2. Keranjang");
   console.log("3. Histori");
@@ -187,3 +187,4 @@ function tambahMenu() {
 }
 
 homeMenu();
+
