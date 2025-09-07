@@ -17,7 +17,7 @@ function homeMenu() {
         tambahMenu();
         break;
       case 2:
-        console.log(storageProduct);
+        ;
         bayar();
         break;
       case 3:
@@ -94,6 +94,18 @@ let storageProduct = [];
 let historiPesanan = [];
 
 function bayar() {
+  let indexProduct = 0;
+  while (storageProduct[indexProduct] !== undefined) {
+    console.log(
+      `${indexProduct + 1}. ${storageProduct[indexProduct].nama} ${
+        storageProduct[indexProduct].harga
+      } Jumlah ${storageProduct[indexProduct].jumlah} Total ${
+        storageProduct[indexProduct].subTotal
+      }`
+    );
+    indexProduct++;
+  }
+  
   let jumlahTotalBelanja = 0;
   let i = 0;
   while (storageProduct[i] !== undefined) {
@@ -122,13 +134,13 @@ function bayar() {
 }
 
 function histori() {
-  console.log(historiPesanan);
+  // console.log(historiPesanan);
   let jumlahHistori = 0;
   while (historiPesanan[jumlahHistori] !== undefined) {
     console.log(
       `${jumlahHistori + 1}. ${historiPesanan[jumlahHistori].nama} ${
         historiPesanan[jumlahHistori].harga
-      }`
+      } Jumlah: ${historiPesanan[jumlahHistori].jumlah} Total ${historiPesanan[jumlahHistori].subTotal}`
     );
     jumlahHistori++;
   }
@@ -136,10 +148,11 @@ function histori() {
     homeMenu();
   });
 }
+
 function tambahMenu() {
   let count = 0;
   while (menu[count] !== undefined) {
-    console.log(`${count + 1}. ${menu[count].nama}`);
+    console.log(`${count + 1}. ${menu[count].nama} ${menu[count].harga}`);
     count++;
   }
   rl.question("Pilih Menu (Masukaan Angka) : ", (inputProduk) => {
@@ -157,7 +170,19 @@ function tambahMenu() {
             ...{ subTotal: quantity * dataInput.harga },
           };
           storageProduct = [...storageProduct, ...[dataInput]];
-          console.log(storageProduct);
+          // console.log(storageProduct);
+          let indexProduct = 0
+          while(storageProduct[indexProduct] !== undefined){
+            console.log(
+              `${indexProduct + 1}. ${storageProduct[indexProduct].nama} ${
+                storageProduct[indexProduct].harga
+              } Jumlah ${storageProduct[indexProduct].jumlah} Total ${
+                storageProduct[indexProduct].subTotal
+              }`
+            );
+             indexProduct++;
+          } 
+         
           rl.question("Tambah Menu (y/n)", (inputMenu) => {
             switch (inputMenu) {
               case "y":
@@ -187,4 +212,3 @@ function tambahMenu() {
 }
 
 homeMenu();
-
