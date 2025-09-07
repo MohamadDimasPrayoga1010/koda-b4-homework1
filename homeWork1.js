@@ -3,6 +3,7 @@ const { stdin: input, stdout: output } = require("node:process");
 const { log } = require("node:console");
 
 const rl = readline.createInterface({ input, output });
+
 function homeMenu() {
   console.log("Burger Bangor");
   console.log("1. Menu");
@@ -17,7 +18,6 @@ function homeMenu() {
         tambahMenu();
         break;
       case 2:
-        ;
         bayar();
         break;
       case 3:
@@ -36,58 +36,19 @@ function homeMenu() {
 }
 
 let menu = [
-  {
-    nama: "Bangor Pitik Lava",
-    harga: 29000,
-  },
-  {
-    nama: "Bangor Pitik Lava",
-    harga: 29000,
-  },
-  {
-    nama: "Bangor Cheese Lava",
-    harga: 31000,
-  },
-  {
-    nama: "Bangor Lava Sausage",
-    harga: 27500,
-  },
-  {
-    nama: "Bangor Jelata Cheess",
-    harga: 24700,
-  },
-  {
-    nama: "Bangor Juragan Cheese",
-    harga: 31700,
-  },
-  {
-    nama: "Bangor Ningrat Cheese",
-    harga: 49200,
-  },
-  {
-    nama: "Bangor Juragan",
-    harga: 29000,
-  },
-  {
-    nama: "Bangor Ningrat",
-    harga: 44200,
-  },
-  {
-    nama: "Bangor Sultan",
-    harga: 55500,
-  },
-  {
-    nama: "Bangor Fish",
-    harga: 27500,
-  },
-  {
-    nama: "Tea",
-    harga: 9500,
-  },
-  {
-    nama: "Soft Drink",
-    harga: 10500,
-  },
+  { nama: "Bangor Pitik Lava", harga: 29000 },
+  { nama: "Bangor Pitik Lava", harga: 29000 },
+  { nama: "Bangor Cheese Lava", harga: 31000 },
+  { nama: "Bangor Lava Sausage", harga: 27500 },
+  { nama: "Bangor Jelata Cheess", harga: 24700 },
+  { nama: "Bangor Juragan Cheese", harga: 31700 },
+  { nama: "Bangor Ningrat Cheese", harga: 49200 },
+  { nama: "Bangor Juragan", harga: 29000 },
+  { nama: "Bangor Ningrat", harga: 44200 },
+  { nama: "Bangor Sultan", harga: 55500 },
+  { nama: "Bangor Fish", harga: 27500 },
+  { nama: "Tea", harga: 9500 },
+  { nama: "Soft Drink", harga: 10500 },
 ];
 
 let storageProduct = [];
@@ -99,20 +60,20 @@ function bayar() {
     console.log(
       `${indexProduct + 1}. ${storageProduct[indexProduct].nama} ${
         storageProduct[indexProduct].harga
-      } Jumlah ${storageProduct[indexProduct].jumlah} Total ${
-        storageProduct[indexProduct].subTotal
-      }`
+      } ` +
+        `Jumlah ${storageProduct[indexProduct].jumlah} Total ${storageProduct[indexProduct].subTotal}`
     );
     indexProduct++;
   }
-  
+
   let jumlahTotalBelanja = 0;
   let i = 0;
   while (storageProduct[i] !== undefined) {
     jumlahTotalBelanja += storageProduct[i].subTotal;
     i++;
   }
-  console.log(`Total Belanja :  ${jumlahTotalBelanja}`);
+
+  console.log(`Total Belanja : ${jumlahTotalBelanja}`);
   rl.question("Checkout Pesanan (y/n)", (bayarPesanan) => {
     switch (bayarPesanan) {
       case "y":
@@ -134,16 +95,17 @@ function bayar() {
 }
 
 function histori() {
-  // console.log(historiPesanan);
   let jumlahHistori = 0;
   while (historiPesanan[jumlahHistori] !== undefined) {
     console.log(
       `${jumlahHistori + 1}. ${historiPesanan[jumlahHistori].nama} ${
         historiPesanan[jumlahHistori].harga
-      } Jumlah: ${historiPesanan[jumlahHistori].jumlah} Total ${historiPesanan[jumlahHistori].subTotal}`
+      } ` +
+        `Jumlah: ${historiPesanan[jumlahHistori].jumlah} Total ${historiPesanan[jumlahHistori].subTotal}`
     );
     jumlahHistori++;
   }
+
   rl.question("Kembali Ke Home Menu", () => {
     homeMenu();
   });
@@ -155,12 +117,12 @@ function tambahMenu() {
     console.log(`${count + 1}. ${menu[count].nama} ${menu[count].harga}`);
     count++;
   }
+
   rl.question("Pilih Menu (Masukaan Angka) : ", (inputProduk) => {
     inputProduk = parseInt(inputProduk);
     if (inputProduk > 0 && inputProduk < count + 1) {
-      let dataInput = {
-        ...menu[inputProduk - 1],
-      };
+      let dataInput = { ...menu[inputProduk - 1] };
+
       rl.question("Jumlah Pesanan : ", (quantity) => {
         quantity = parseInt(quantity);
         if (quantity > 0) {
@@ -169,20 +131,20 @@ function tambahMenu() {
             ...{ jumlah: quantity },
             ...{ subTotal: quantity * dataInput.harga },
           };
+
           storageProduct = [...storageProduct, ...[dataInput]];
-          // console.log(storageProduct);
-          let indexProduct = 0
-          while(storageProduct[indexProduct] !== undefined){
+
+          let indexProduct = 0;
+          while (storageProduct[indexProduct] !== undefined) {
             console.log(
               `${indexProduct + 1}. ${storageProduct[indexProduct].nama} ${
                 storageProduct[indexProduct].harga
-              } Jumlah ${storageProduct[indexProduct].jumlah} Total ${
-                storageProduct[indexProduct].subTotal
-              }`
+              } ` +
+                `Jumlah ${storageProduct[indexProduct].jumlah} Total ${storageProduct[indexProduct].subTotal}`
             );
-             indexProduct++;
-          } 
-         
+            indexProduct++;
+          }
+
           rl.question("Tambah Menu (y/n)", (inputMenu) => {
             switch (inputMenu) {
               case "y":
